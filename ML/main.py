@@ -15,6 +15,8 @@ parkinsons_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/parkinso
 
 parkinsons_scaler = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/parkinsons_scaler_model.sav','rb'))
 
+insurance_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/insurance_model.sav','rb'))
+
 @app.route('/predictDiabetes', methods=['POST'])
 def predict():
     diabetes = request.get_json()
@@ -112,6 +114,41 @@ def predict_parkinsons():
         park_disease_result = "You do not have Parkinson's Disease"
 
     return jsonify({'park_disease_prediction':park_disease_result})
+
+@app.route('/predictInsurance', methods=['POST'])
+def predict_insurance():
+    insurance = request.get_json()
+       
+    p1 = insurance['age']
+    
+    gender = insurance['sex']
+    if(gender == "male"):
+        p2 = 0
+    else:
+        p2 = 1
+        
+    p3 = insurance['bmi']
+    p4 = insurance['children']
+    
+    smoke = insurance['smoker']
+    if(smoke == "yes"):
+        p5 = 0
+    else:
+        p5 = 1
+        
+    reg = insurance['region']
+    if(reg == "southeast"):
+        p6 = 0
+    elif(reg == "southwest"):
+        p6 = 1
+    elif(reg == "northeast"):
+        p6 = 2
+    elif(reg == "northwest"):
+        p6 = 3
+
+    insurance_prediction = insurance_model.predict(np.array([[p1, p2, p3, p4, p5, p6]]))
+
+    return jsonify({'Medical_Insurance_Estimation':insurance_prediction[0]})
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
