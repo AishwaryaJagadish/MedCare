@@ -1,3 +1,4 @@
+import { DiseaseInput } from "./components/DiseaseInput";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
@@ -10,6 +11,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/diseasePrediction" element={<DiseaseInput />} />
     </Routes>
     </>
   );

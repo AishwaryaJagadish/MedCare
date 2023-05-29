@@ -1,21 +1,20 @@
 from flask import Flask, request, jsonify
-from sklearn.preprocessing import StandardScaler
 import pickle
 import numpy as np
 
 app = Flask(__name__)
 
-diabetes_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/diabetes_model.sav','rb'))
+diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
 
-diabetes_scaler = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/diabetes_scaler.sav','rb'))
+diabetes_scaler = pickle.load(open('diabetes_scaler.sav','rb'))
 
-heart_disease_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/heart_disease_model.sav','rb'))
+heart_disease_model = pickle.load(open('heart_disease_model.sav','rb'))
 
-parkinsons_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/parkinsons_disease_model.sav','rb'))
+parkinsons_model = pickle.load(open('parkinsons_disease_model.sav','rb'))
 
-parkinsons_scaler = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/parkinsons_scaler_model.sav','rb'))
+parkinsons_scaler = pickle.load(open('parkinsons_scaler_model.sav','rb'))
 
-insurance_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/insurance_model.sav','rb'))
+insurance_model = pickle.load(open('insurance_model.sav','rb'))
 
 @app.route('/predictDiabetes', methods=['POST'])
 def predict():

@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
+import { Link } from 'react-router-dom';
 
 // const staticData = [{ "title": "Diabetes Prediction", "description": "This is a short description", "link": "/diabetes-prediction" }, { "title": "Heart Disease Prediction", "description": "This is a short description", "link": "/heart-disease-prediction" }, { "title": "Liver Disease Prediction", "description": "This is a short description", "link": "/liver-disease-prediction" }, { "title": "Kidney Disease Prediction", "description": "This is a short description", "link": "/kidney-disease-prediction" }, { "title": "Breast Cancer Prediction", "description": "This is a short description", "link": "/breast-cancer-prediction" }, { "title": "Stroke Prediction", "description": "This is a short description", "link": "/stroke-prediction" }, { "title": "Pneumonia Prediction", "description": "This is a short description", "link": "/pneumonia-prediction" }]
 
@@ -7,22 +8,22 @@ const staticData = [
     {
         "title": "Diabetes Prediction",
         "description": "Use our machine learning model to predict the likelihood of diabetes based on various health parameters.",
-        "link": "/diabetes-prediction"
+        "link": "/predictDiabetes"
     },
     {
         "title": "Heart Disease Prediction",
         "description": "Get personalized insights into your risk for developing heart disease with our advanced prediction algorithm.",
-        "link": "/heart-disease-prediction"
+        "link": "/predictHeart"
     },
     {
-        "title": "Cancer Prediction",
-        "description": "Our machine learning model can predict the likelihood of cancer based on your lifestyle habits and medical history.",
-        "link": "/cancer-prediction"
+        "title": "Parkinsons Disease Prediction",
+        "description": "Our machine learning model can predict the likelihood of Parkinson's disease based on your lifestyle habits and medical history.",
+        "link": "/predictParkinsons"
     },
     {
-        "title": "Stroke Prediction",
-        "description": "Find out your risk of stroke based on factors such as blood pressure, cholesterol levels, and smoking habits.",
-        "link": "/stroke-prediction"
+        "title": "Medical Insurance Cost Prediction",
+        "description": "Our advanced prediction algorithm can help you estimate your medical insurance costs based on various factors.",
+        "link": "/predictInsurance"
     },
     {
         "title": "Alzheimer's Prediction",
@@ -59,7 +60,7 @@ function HomePage() {
                                             <p className="card-text">{data.description}</p>
                                             <div className="d-flex justify-content-end align-items-center">
                                                 <div className="btn-group">
-                                                    <button type="button" className="btn btn-outline-secondary">Get Started</button>
+                                                    <Link to='/diseasePrediction' state= {{data}}className="btn btn-outline-secondary">Get Started</Link>
                                                 </div>
                                             </div>
                                         </div>
