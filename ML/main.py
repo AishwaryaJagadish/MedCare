@@ -1,20 +1,24 @@
 from flask import Flask, request, jsonify
+from sklearn.preprocessing import StandardScaler
 import pickle
 import numpy as np
+import json
 
 app = Flask(__name__)
 
-diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
+diabetes_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/diabetes_model.sav','rb'))
 
-diabetes_scaler = pickle.load(open('diabetes_scaler.sav','rb'))
+diabetes_scaler = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/diabetes_scaler.sav','rb'))
 
-heart_disease_model = pickle.load(open('heart_disease_model.sav','rb'))
+heart_disease_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/heart_disease_model.sav','rb'))
 
-parkinsons_model = pickle.load(open('parkinsons_disease_model.sav','rb'))
+parkinsons_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/parkinsons_disease_model.sav','rb'))
 
-parkinsons_scaler = pickle.load(open('parkinsons_scaler_model.sav','rb'))
+parkinsons_scaler = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/parkinsons_scaler_model.sav','rb'))
 
-insurance_model = pickle.load(open('insurance_model.sav','rb'))
+insurance_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/insurance_model.sav','rb'))
+
+calories_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/calories_model.sav','rb'))
 
 @app.route('/predictDiabetes', methods=['POST'])
 def predict():
@@ -148,6 +152,29 @@ def predict_insurance():
     insurance_prediction = insurance_model.predict(np.array([[p1, p2, p3, p4, p5, p6]]))
 
     return jsonify({'Medical_Insurance_Estimation':insurance_prediction[0]})
+
+@app.route('/predictCalories', methods=['POST'])
+def predict_calories():
+    calories = request.get_json()
+       
+    sex = calories['Gender']
+    if(sex == "male"):
+        p1 = 0
+    else:
+        p1 = 1
+        
+    p2 = calories['Age']
+    p3 = calories['Height']
+    p4 = calories['Weight']
+    p5 = float(calories['Duration'])
+    p6 =float(calories['Heart_rate'])
+    p7 =float(calories['Body_temp'] )  
+    
+    
+    features = np.array([[p1, p2, p3, p4, p5, p6, p7]])
+    calories_prediction = calories_model.predict(features)
+
+    return jsonify({'calories_burnt_prediction':float(calories_prediction[0])})
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
