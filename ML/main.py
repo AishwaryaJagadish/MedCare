@@ -1,24 +1,27 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from sklearn.preprocessing import StandardScaler
 import pickle
 import numpy as np
 import json
 
+#flask --app main run
 app = Flask(__name__)
+CORS(app)
 
-diabetes_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/diabetes_model.sav','rb'))
+diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
 
-diabetes_scaler = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/diabetes_scaler.sav','rb'))
+diabetes_scaler = pickle.load(open('diabetes_scaler.sav','rb'))
 
-heart_disease_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/heart_disease_model.sav','rb'))
+heart_disease_model = pickle.load(open('heart_disease_model.sav','rb'))
 
-parkinsons_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/parkinsons_disease_model.sav','rb'))
+parkinsons_model = pickle.load(open('parkinsons_disease_model.sav','rb'))
 
-parkinsons_scaler = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/parkinsons_scaler_model.sav','rb'))
+parkinsons_scaler = pickle.load(open('parkinsons_scaler_model.sav','rb'))
 
-insurance_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/insurance_model.sav','rb'))
+insurance_model = pickle.load(open('insurance_model.sav','rb'))
 
-calories_model = pickle.load(open('F:/Projects_2023/MedCare/ModelsApi/calories_model.sav','rb'))
+calories_model = pickle.load(open('calories_model.sav','rb'))
 
 @app.route('/predictDiabetes', methods=['POST'])
 def predict():
@@ -46,11 +49,13 @@ def predict():
     prediction = diabetes_model.predict(std_data)
     print(prediction)
 
-    result = "Not diabetic"
+    res = False
+    result = "You are not diabetic"
     if(prediction[0]==1):
-        result = "Diabetic"
+        result = "You are Diabetic!"
+        res = True
 
-    return jsonify({'prediction':result})
+    return jsonify({'result': res,  'prediction':result, "tips": "Manage diabetes effectively by monitoring blood sugar, following a balanced diet, engaging in regular exercise, taking prescribed medications, practicing stress management, attending regular check-ups, educating yourself about the condition, and seeking support from loved ones or support groups."})
 
 @app.route('/predictHeart', methods=['POST'])
 def predict_heart():
@@ -71,13 +76,14 @@ def predict_heart():
     p13 = heart['thal']
 
     heart_disease_prediction = heart_disease_model.predict(np.array([[p1, p2, p3, p4, p5, p6, p7,p8,p9,p10,p11,p12,p13]]))
-    
+    res= False
     if(heart_disease_prediction[0]==1):
-        heart_disease_result = "You have Heart Disease"
+        heart_disease_result = "You have Heart Disease!"
+        res = True
     else:
         heart_disease_result = "You do not have Heart Disease"
 
-    return jsonify({'heart_disease_prediction':heart_disease_result})
+    return jsonify({'result': res, 'prediction':heart_disease_result, "tips": "Manage heart disease by eating a heart-healthy diet, exercising regularly, quitting smoking, maintaining a healthy weight, and reducing stress."})
 
 @app.route('/predictParkinsons', methods=['POST'])
 def predict_parkinsons():
@@ -110,13 +116,15 @@ def predict_parkinsons():
     std_data =  parkinsons_scaler.transform(np.array([[p1, p2, p3, p4, p5, p6, p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22]]))
 
     park_disease_prediction = parkinsons_model.predict(std_data)
+    res = False
     
     if(park_disease_prediction[0]==1):
         park_disease_result = "You have Parkinson's Disease"
+        res = True
     else:
         park_disease_result = "You do not have Parkinson's Disease"
 
-    return jsonify({'park_disease_prediction':park_disease_result})
+    return jsonify({'result': res,'prediction':park_disease_result, "tips": "Manage Parkinson's disease by exercising regularly, eating a balanced diet, getting enough sleep, and reducing stress."})
 
 @app.route('/predictInsurance', methods=['POST'])
 def predict_insurance():
@@ -151,7 +159,7 @@ def predict_insurance():
 
     insurance_prediction = insurance_model.predict(np.array([[p1, p2, p3, p4, p5, p6]]))
 
-    return jsonify({'Medical_Insurance_Estimation':insurance_prediction[0]})
+    return jsonify({'prediction': insurance_prediction[0], "tips": "Manage your health insurance by choosing the right plan, understanding your benefits, and keeping track of your medical expenses."})
 
 @app.route('/predictCalories', methods=['POST'])
 def predict_calories():
@@ -174,7 +182,7 @@ def predict_calories():
     features = np.array([[p1, p2, p3, p4, p5, p6, p7]])
     calories_prediction = calories_model.predict(features)
 
-    return jsonify({'calories_burnt_prediction':float(calories_prediction[0])})
+    return jsonify({'prediction':"You have burnt "+float(calories_prediction[0])+ " calories", "tips": "Manage your calories by eating a balanced diet, exercising regularly, and drinking plenty of water."})
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
