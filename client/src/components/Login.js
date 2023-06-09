@@ -1,7 +1,25 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { login, register } from '../redux/actions';
 
 function Login() {
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password , setPassword] = useState("")
     const [islogin, setisLogin] = useState(true)
+    const dispatch = useDispatch();
+    const { isFetching, error } = useSelector((state) => state.medCareReducer);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(name, email, password)
+        if(islogin){
+            dispatch(login({email, password}))
+        }
+        else{
+            dispatch(register({name, email, password}))
+        }
+    }
 
     return (
         <div className="container text-center">
@@ -14,20 +32,19 @@ function Login() {
                             <form>
                                 {islogin ? "" :
                                 (<div className="form-floating mb-3">
-                                    <input type="text" className="form-control" id="floatingInput" placeholder="Name" />
+                                    <input type="text" className="form-control" id="floatingInput" placeholder="Name" onChange={e => setName(e.target.value)} />
                                     <label for="floatingInput">Name</label>
                                 </div>)}
                                 <div className="form-floating mb-3">
-                                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} />
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div className="form-floating mb-3">
-                                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                                     <label for="floatingPassword">Password</label>
                                 </div>
                                 <div className="d-grid">
-                                    <button className="btn btn-info btn-login " type="submit">Sign
-                                        in</button>
+                                    <button className="btn btn-info btn-login " type="submit" onClick={handleSubmit} disabled={isFetching} >{!islogin ? "Create an account" : "Sign in"}</button>
                                 </div>
                             </form>
                             <p className="py-4 text-center">

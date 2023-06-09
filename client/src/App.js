@@ -1,17 +1,20 @@
+import { useSelector } from "react-redux";
 import { DiseaseInput } from "./components/DiseaseInput";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 
 
 function App() {
+  const user = useSelector(state => state.medCareReducer.user);
+  console.log(user);
   return (
     <>
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/diseasePrediction" element={<DiseaseInput />} />
+      <Route path="/" element={user? <HomePage/>: <Navigate to ="/login"/>} />
+      <Route path="/login" element={user? <Navigate to ="/"/>:<Login />} />
+      <Route path="/diseasePrediction" element={user? <DiseaseInput/>: <Navigate to ="/login"/>} />
     </Routes>
     </>
   );

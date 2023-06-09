@@ -1,7 +1,14 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { logout } from '../redux/actions';
 
 function Navbar() {
+    const dispatch = useDispatch();
+    const handleLogout = (e) => {
+        e.preventDefault();
+        dispatch(logout()) 
+    }
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
             <div className="container">
@@ -34,7 +41,7 @@ function Navbar() {
                                     <li><a className="dropdown-item" href="#">Profile</a></li>
                                     <li><a className="dropdown-item" href="#">Settings</a></li>
                                     <li><hr className="dropdown-divider"/></li>
-                                    <li><a className="dropdown-item" href="#">Sign Out</a></li>
+                                    <li><a className="dropdown-item" href="#" onClick={handleLogout} >Sign Out</a></li>
                                 </ul>
                             </li>
                         </ul>

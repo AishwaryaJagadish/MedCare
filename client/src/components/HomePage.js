@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // const staticData = [{ "title": "Diabetes Prediction", "description": "This is a short description", "link": "/diabetes-prediction" }, { "title": "Heart Disease Prediction", "description": "This is a short description", "link": "/heart-disease-prediction" }, { "title": "Liver Disease Prediction", "description": "This is a short description", "link": "/liver-disease-prediction" }, { "title": "Kidney Disease Prediction", "description": "This is a short description", "link": "/kidney-disease-prediction" }, { "title": "Breast Cancer Prediction", "description": "This is a short description", "link": "/breast-cancer-prediction" }, { "title": "Stroke Prediction", "description": "This is a short description", "link": "/stroke-prediction" }, { "title": "Pneumonia Prediction", "description": "This is a short description", "link": "/pneumonia-prediction" }]
 
@@ -12,7 +13,7 @@ const staticData = [
     },
     {
         "title": "Heart Disease Prediction",
-        "description": "Get personalized insights into your risk for developing heart disease with our advanced prediction algorithm.",
+        "description": "Get personalized insights into your risk for developing heart disease with our advanced machine learning heart disease prediction algorithm.",
         "link": "/predictHeart"
     },
     {
@@ -24,16 +25,12 @@ const staticData = [
         "title": "Medical Insurance Cost Prediction",
         "description": "Our advanced prediction algorithm can help you estimate your medical insurance costs based on various factors.",
         "link": "/predictInsurance"
-    },
-    {
-        "title": "Alzheimer's Prediction",
-        "description": "Our advanced prediction algorithm can help identify your risk for developing Alzheimer's disease based on various factors.",
-        "link": "/alzheimers-prediction"
     }
 ];
 
 
 function HomePage() {
+    const user = useSelector(state => state.medCareReducer.user);
 
     return (
         <>
@@ -41,7 +38,7 @@ function HomePage() {
             <section className="py-5 text-center container">
                 <div className="row py-lg-5">
                     <div className="col-lg-6 col-md-8 mx-auto">
-                        <h1 className="text-info">Welcome, UserName!</h1>
+                        <h1 className="text-info">Welcome, {user.name}!</h1>
                         <p className="lead text-body-secondary">Get accurate disease predictions using machine learning. Explore our various prediction options for conditions such as diabetes, heart disease, and more. Take control of your health today with MedCare.</p>
                     </div>
                 </div>
