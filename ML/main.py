@@ -182,7 +182,7 @@ def predict_calories():
     features = np.array([[p1, p2, p3, p4, p5, p6, p7]])
     calories_prediction = calories_model.predict(features)
 
-    return jsonify({'prediction':"You have burnt "+float(calories_prediction[0])+ " calories", "tips": "Manage your calories by eating a balanced diet, exercising regularly, and drinking plenty of water."})
+    return jsonify({'prediction':"You have burnt "+str(calories_prediction[0])+" calories", "tips": "Manage your calories by eating a balanced diet, exercising regularly, and drinking plenty of water."})
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
