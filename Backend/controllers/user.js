@@ -49,9 +49,37 @@ exports.updateUser =(req,res) => {
             user.salt= undefined;
             user.encry_password= undefined;
             res.json(user);
-
         }
     )
+}
+
+exports.userAddPrediction = (req,res) => {
+    User.findByIdAndUpdate(
+        {_id : req.profile._id},
+        {$push : {predictions : req.body}},
+        {new: true, useFindAndModify : false},
+        (err,user) => {
+            if(err) {
+                return res.status(400),json({
+                    error : "you are not authorized to update this user"
+                })
+            }
+            user.salt= undefined;
+            user.encry_password= undefined;
+            res.json(user);
+        }
+    )
+}
+
+exports.usergetPrediction = (req,res) => {
+    User.findById(req.profile._id).exec((err,user) => {
+        if(err || !user){
+            return res.status(400).json({
+                error : "No user found"
+            })
+        }
+        res.json(user.predictions);
+    })
 }
 
 

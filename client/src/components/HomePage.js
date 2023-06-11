@@ -25,6 +25,11 @@ const staticData = [
         "title": "Medical Insurance Cost Prediction",
         "description": "Our advanced prediction algorithm can help you estimate your medical insurance costs based on various factors.",
         "link": "/predictInsurance"
+    }, 
+    {
+        "title": "Calories Burnt Prediction",
+        "description": "Our advaced machine learning model can predict the number of calories you will burn based on your duration of exercise and other factors.",
+        "link": "/predictCalories"
     }
 ];
 

@@ -38,8 +38,7 @@ function Navbar() {
                                     <i className="bi bi-person-fill"></i>
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a className="dropdown-item" href="#">Profile</a></li>
-                                    <li><a className="dropdown-item" href="#">Settings</a></li>
+                                    <li><Link to= "/dashboard" className="dropdown-item">Profile</Link></li>
                                     <li><hr className="dropdown-divider"/></li>
                                     <li><a className="dropdown-item" href="#" onClick={handleLogout} >Sign Out</a></li>
                                 </ul>

@@ -7,6 +7,8 @@ function Login() {
     const [email, setEmail] = useState("")
     const [password , setPassword] = useState("")
     const [islogin, setisLogin] = useState(true)
+    const [mobile, setMobile] = useState("")
+    const [gender, setGender]  = useState("")
     const dispatch = useDispatch();
     const { isFetching, error } = useSelector((state) => state.medCareReducer);
 
@@ -17,7 +19,7 @@ function Login() {
             dispatch(login({email, password}))
         }
         else{
-            dispatch(register({name, email, password}))
+            dispatch(register({name, email,mobile, password, gender}))
         }
     }
 
@@ -39,6 +41,16 @@ function Login() {
                                     <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} />
                                     <label for="floatingInput">Email address</label>
                                 </div>
+                                {islogin ? "" :
+                                (<div className="form-floating mb-3">
+                                    <input type="text" className="form-control" id="floatingInput" placeholder="Mobile" onChange={e => setMobile(e.target.value)} />
+                                    <label for="floatingInput">Mobile</label>
+                                </div>)}
+                                {islogin ? "" :
+                                (<div className="form-floating mb-3">
+                                    <input type="text" className="form-control" id="floatingInput" placeholder="Gender" onChange={e => setGender(e.target.value)} />
+                                    <label for="floatingInput">Gender</label>
+                                </div>)}
                                 <div className="form-floating mb-3">
                                     <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                                     <label for="floatingPassword">Password</label>

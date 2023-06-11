@@ -15,6 +15,18 @@ var userSchema = new mongoose.Schema({
         required:true,
         unique: true
     },
+    mobile: {
+        type: Number,
+        required: true
+    },
+    gender: {
+        type: String,
+        required: true
+    },
+    predictions: {
+        type: Array,
+        default: []
+    },
     encry_password :{
         type:String,
         required:true

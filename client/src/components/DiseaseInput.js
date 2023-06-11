@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar';
-import { useLocation } from 'react-router-dom';
+import { json, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './DiseaseInput.css'
+import { useSelector } from 'react-redux';
 
 const staticData = {
     "Diabetes Prediction": ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"],
     "Heart Disease Prediction": ["Age", "Sex", "CP", "Trestbps", "Chol", "Fbs", "Restecg", "Thalach", "Exang", "Oldpeak", "Slope", "Ca", "Thal"],
     "Parkinsons Disease Prediction": ["Fo", "Fhi", "Flo", "Jitter", "Jitter_abs", "Rap", "Ppq", "Ddp", "Shimmer", "Shimmer_db", "Shimmer_apq3", "Shimmer_apq5", "Apq", "Dda", "Nhr", "Hnr", "RPDE", "DFA", "Spread1", "Spread2", "D2", "PPE"],
     "Medical Insurance Cost Prediction": ["Age", "Sex", "BMI", "Children", "Smoker", "Region"],
+    "Calories Burnt Prediction": ["Gender", "Age", "Height", "Weight", "Duration", "Heart_rate", "Body_temp"]
 }
 
 const API_URL = "http://localhost:5000";
+const BACKEND_URL = "http://localhost:8000";
 
 export const DiseaseInput = () => {
     const location = useLocation();
@@ -19,6 +22,8 @@ export const DiseaseInput = () => {
     const [showNegResult, setShowNegResult] = useState(false);
     const [showPosResult, setShowPosResult] = useState(false);
     const [result, setResult] = useState({});
+    const user = useSelector(state => state.medCareReducer.user);
+    console.log(user);
     console.log(data);
 
     const handleSubmit = async(event) => {
@@ -28,10 +33,12 @@ export const DiseaseInput = () => {
         const jsonData = Object.fromEntries(formData.entries());
         console.log(jsonData);
         for (let prop in jsonData) {
+            if(prop != "Gender")
             jsonData[prop] = parseFloat(jsonData[prop]);
         }
         const res = await axios.post(`${API_URL}${data.link}`, jsonData)
         setResult(res.data);
+        const backendRes = await axios.put(`${BACKEND_URL}/api/users/addPrediction/${user._id}`, {prediction: res.data.prediction, disease: data.title});
         if(res.data.result){
             setShowNegResult(true);
             setShowPosResult(false);
