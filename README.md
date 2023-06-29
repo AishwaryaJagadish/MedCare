@@ -58,3 +58,15 @@ http://localhost:3000
 5. The Flask application will process the data using the appropriate machine learning model and return the prediction result to the backend server.
 6. The backend server will then send the prediction result back to the frontend.
 7. View the prediction result and take necessary actions for your health.
+
+## Screenshots
+![image](https://github.com/adirn26/MedCare/assets/100658781/0e809131-619d-4f46-9f32-b350e6ff084a)
+![image](https://github.com/adirn26/MedCare/assets/100658781/c070c973-f631-41e1-9a77-5910895b61f1)
+![image](https://github.com/adirn26/MedCare/assets/100658781/09498f62-0e5f-48e2-a133-46b21effb198)
+![image](https://github.com/adirn26/MedCare/assets/100658781/cf15df53-1141-4f4f-b871-07731dde9175)
+![image](https://github.com/adirn26/MedCare/assets/100658781/f157be35-f2ac-441f-a7d8-756b4d65c855)
+
+
+
+
+
