@@ -21,12 +21,12 @@ function Navbar() {
                         <li className="nav-item">
                             <Link to="/" className="nav-link active" aria-current="page" >Home</Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link to="/" className="nav-link">About</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/" className="nav-link">Contact Us</Link>
-                        </li>
+                        </li> */}
                     </ul>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

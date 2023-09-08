@@ -61,19 +61,24 @@ def predict():
 def predict_heart():
     heart = request.get_json()
        
-    p1 = heart['age']
-    p2 = heart['sex']
-    p3 = heart['cp']
-    p4 = heart['trestbps']
-    p5 =heart['chol']
-    p6 = heart['fbs']      
-    p7 = heart['restecg']
-    p8 = heart['thalach']
-    p9 = heart['exang']
-    p10 = heart['oldpeak']
-    p11 = heart['slope']
-    p12 = heart['ca']
-    p13 = heart['thal']
+    p1 = heart['Age']
+    p2 = heart['Sex']
+    p3 = heart['CP']
+    p4 = heart['Trestbps']
+    p5 =heart['Chol']
+    p6 = heart['Fbs']      
+    p7 = heart['Restecg']
+    p8 = heart['Thalach']
+    p9 = heart['Exang']
+    p10 = heart['Oldpeak']
+    p11 = heart['Slope']
+    p12 = heart['Ca']
+    p13 = heart['Thal']
+
+    if p2 == "male": 
+        p2 = 1
+    else : 
+        p2 = 0
 
     heart_disease_prediction = heart_disease_model.predict(np.array([[p1, p2, p3, p4, p5, p6, p7,p8,p9,p10,p11,p12,p13]]))
     res= False
@@ -89,28 +94,28 @@ def predict_heart():
 def predict_parkinsons():
     park = request.get_json()
        
-    p1 = park['fo']
-    p2 = park['fhi']
-    p3 = park['flo']
-    p4 = park['jitter']
-    p5 =park['jitter_abs']
-    p6 = park['rap']      
-    p7 = park['ppq']
-    p8 =park['ddp']
-    p9 = park['shimmer']
-    p10 = park['shimmer_db']
-    p11 = park['shimmer_apq3']
-    p12 = park['shimmer_apq5']
-    p13 = park['apq']
-    p14 = park['shimmer_dda']
-    p15 = park['nhr']
-    p16 = park['hnr']
-    p17 = park['rpde']
-    p18 = park['dfa']
-    p19 = park['spread1']
-    p20 = park['spread2']
-    p21 = park['d2']
-    p22 = park['ppe']
+    p1 = park['Fo']
+    p2 = park['Fhi']
+    p3 = park['Flo']
+    p4 = park['Jitter']
+    p5 =park['Jitter_abs']
+    p6 = park['Rap']      
+    p7 = park['Ppq']
+    p8 =park['Ddp']
+    p9 = park['Shimmer']
+    p10 = park['Shimmer_db']
+    p11 = park['Shimmer_apq3']
+    p12 = park['Shimmer_apq5']
+    p13 = park['Apq']
+    p14 = park['Shimmer_dda']
+    p15 = park['Nhr']
+    p16 = park['Hnr']
+    p17 = park['RPDE']
+    p18 = park['DFA']
+    p19 = park['Spread1']
+    p20 = park['Spread2']
+    p21 = park['D2']
+    p22 = park['PPE']
     
     
     std_data =  parkinsons_scaler.transform(np.array([[p1, p2, p3, p4, p5, p6, p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22]]))
@@ -130,24 +135,24 @@ def predict_parkinsons():
 def predict_insurance():
     insurance = request.get_json()
        
-    p1 = insurance['age']
+    p1 = insurance['Age']
     
-    gender = insurance['sex']
+    gender = insurance['Sex']
     if(gender == "male"):
         p2 = 0
     else:
         p2 = 1
         
-    p3 = insurance['bmi']
-    p4 = insurance['children']
+    p3 = insurance['BMI']
+    p4 = insurance['Children']
     
-    smoke = insurance['smoker']
+    smoke = insurance['Smoker']
     if(smoke == "yes"):
         p5 = 0
     else:
         p5 = 1
         
-    reg = insurance['region']
+    reg = insurance['Region']
     if(reg == "southeast"):
         p6 = 0
     elif(reg == "southwest"):

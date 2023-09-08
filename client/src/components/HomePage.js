@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import prediction from  "../images/prediction.jpg"
 
 // const staticData = [{ "title": "Diabetes Prediction", "description": "This is a short description", "link": "/diabetes-prediction" }, { "title": "Heart Disease Prediction", "description": "This is a short description", "link": "/heart-disease-prediction" }, { "title": "Liver Disease Prediction", "description": "This is a short description", "link": "/liver-disease-prediction" }, { "title": "Kidney Disease Prediction", "description": "This is a short description", "link": "/kidney-disease-prediction" }, { "title": "Breast Cancer Prediction", "description": "This is a short description", "link": "/breast-cancer-prediction" }, { "title": "Stroke Prediction", "description": "This is a short description", "link": "/stroke-prediction" }, { "title": "Pneumonia Prediction", "description": "This is a short description", "link": "/pneumonia-prediction" }]
 
@@ -9,27 +10,32 @@ const staticData = [
     {
         "title": "Diabetes Prediction",
         "description": "Use our machine learning model to predict the likelihood of diabetes based on various health parameters.",
-        "link": "/predictDiabetes"
+        "link": "/predictDiabetes", 
+        "image": "/diabetes.jpg"
     },
     {
         "title": "Heart Disease Prediction",
         "description": "Get personalized insights into your risk for developing heart disease with our advanced machine learning heart disease prediction algorithm.",
-        "link": "/predictHeart"
+        "link": "/predictHeart", 
+        "image": "/heartdisease.jpg"
     },
     {
         "title": "Parkinsons Disease Prediction",
         "description": "Our machine learning model can predict the likelihood of Parkinson's disease based on your lifestyle habits and medical history.",
-        "link": "/predictParkinsons"
+        "link": "/predictParkinsons", 
+        "image": "/parkinsons.jpg"
     },
     {
         "title": "Medical Insurance Cost Prediction",
         "description": "Our advanced prediction algorithm can help you estimate your medical insurance costs based on various factors.",
-        "link": "/predictInsurance"
+        "link": "/predictInsurance", 
+        "image": "/insurance.jpg"
     }, 
     {
         "title": "Calories Burnt Prediction",
         "description": "Our advaced machine learning model can predict the number of calories you will burn based on your duration of exercise and other factors.",
-        "link": "/predictCalories"
+        "link": "/predictCalories", 
+        "image": "/calories.jpg"
     }
 ];
 
@@ -56,7 +62,7 @@ function HomePage() {
                             return (
                                 <div className="col">
                                     <div className="card shadow-sm">
-                                        <img src="https://source.unsplash.com/4J4fDSGDU7c/800x400" class="card-img-top" alt="Diabetes prediction" />
+                                        <img src={prediction} class="card-img-top" alt="Diabetes prediction" />
                                         <div className="card-body">
                                             <h5 class="card-title text-info-emphasis">{data.title}</h5>
                                             <p className="card-text">{data.description}</p>
