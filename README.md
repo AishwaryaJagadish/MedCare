@@ -1,6 +1,6 @@
 # MedCare
 
-MedCare is a disease prediction system that utilizes machine learning algorithms to provide accurate predictions for various health conditions. It offers disease prediction options for conditions such as diabetes, heart disease, Parkinson's disease, and more. This project aims to empower individuals to take control of their health by offering reliable and real-time disease predictions
+MedCare is a disease prediction system that utilizes machine learning algorithms to provide accurate predictions for various health conditions. It offers disease prediction options for conditions such as diabetes, heart disease, Parkinson's disease, and more. This project aims to empower individuals to take control of their health by offering reliable and real-time disease predictions.
 
 ## Features
 - Accurate disease predictions using machine learning algorithms.
